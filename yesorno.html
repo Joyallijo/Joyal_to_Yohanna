@@ -110,11 +110,32 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
+// --- COUNTER LOGIC ---
+let noAttemptCount = 0;
+
+function handleNoAttempt() {
+    noAttemptCount++;
+    moveButton();
+
+    // Check if count is a multiple of 3 (3, 6, 9...)
+    if (noAttemptCount % 10 === 0) {
+        sendNoUpdate(noAttemptCount);
+    }
+}
+
+function sendNoUpdate(count) {
+    emailjs.send("service_bgtx998", "template_8q9hutf", {
+        message: `She tried to click "No" ${count} times now! 😂`,
+        time: new Date().toLocaleString()
+    });
+}
+// ----------------------
+
 // Improved Mobile-friendly "Run Away" logic
-noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("mouseover", handleNoAttempt);
 noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault(); // Prevents clicking on mobile touch
-    moveButton();
+    handleNoAttempt();
 });
 
 function moveButton() {
@@ -133,8 +154,9 @@ function moveButton() {
 yesBtn.addEventListener("click", () => {
     const timeNow = new Date().toLocaleString();
     
-    emailjs.send("service_p6rqlwh", "template_8q9hutf", {
-        message: "She clicked YES 💖",
+    // Final Yes Email includes total No attempts
+    emailjs.send("service_bgtx998", "template_8q9hutf", {
+        message: `She finally clicked YES! 💖 (After trying to say No ${noAttemptCount} times)`,
         time: timeNow
     });
 
