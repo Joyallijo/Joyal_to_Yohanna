@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yohanna</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+NZ+Basic:wght@100..400&display=swap" rel="stylesheet">
-
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playwrite+NZ+Basic:wght@100..400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================
-       THEME VARIABLES
-    =========================== */
     :root {
       --bg: #fff7fa;
       --bg-2: #ffffff;
@@ -43,9 +38,20 @@
       transition: background 0.5s ease;
     }
 
-    /* ==========================
-       WELCOME OVERLAY
-    =========================== */
+    /* --- SCROLL ANIMATION CLASSES --- */
+    .reveal {
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* WELCOME OVERLAY */
     #overlay {
       position: fixed;
       top: 0; left: 0;
@@ -58,130 +64,51 @@
       transition: opacity 0.8s ease;
     }
 
-    .overlay-content {
-      text-align: center;
-      animation: fadeIn 1s ease;
-      padding: 20px;
-    }
+    .overlay-content { text-align: center; padding: 20px; }
+    .overlay-content p { color: var(--pink); font-size: 1.2rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
 
-    .overlay-content p {
-      margin: 20px 0;
-      font-family: 'Playfair Display', serif;
-      color: var(--pink);
-      font-size: 1.2rem;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ==========================
-       SIDE BAR (NAVIGATION)
-    =========================== */
-    .side-bar {
-      position: fixed;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--card);
-      padding: 20px 12px;
-      border-radius: 50px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      z-index: 100;
-      border: 1px solid rgba(197, 106, 165, 0.1);
-    }
-
-    .side-bar span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--pink);
-      cursor: pointer;
-      transition: transform 0.3s;
-      opacity: 0.8;
-    }
-
-    .side-bar span:hover { opacity: 1; transform: scale(1.1); }
-
-    /* ==========================
-       FLOATING BACKGROUND MUSIC CONTROLLER
-    =========================== */
+    /* CONTROLS */
     .music-controller {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
+      bottom: 25px;
+      right: 25px;
       z-index: 1000;
       background: var(--card);
-      width: 54px;
-      height: 54px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(197, 106, 165, 0.2);
       color: var(--pink);
-      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
-    .music-controller:hover { transform: scale(1.1); }
-
-    /* ==========================
-       MODE TOGGLE
-    =========================== */
     .mode-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
       background: var(--card);
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: var(--shadow);
       z-index: 10;
+      cursor: pointer;
     }
 
-    /* ==========================
-       SECTIONS
-    =========================== */
-    section {
-      min-height: 100vh;
-      padding: 100px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-    }
-
-    /* ==========================
-       HERO & HEART
-    =========================== */
-    .heart-container {
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: center;
-    }
+    /* HERO */
+    section { min-height: 100vh; padding: 80px 20px; display: flex; justify-content: center; align-items: center; }
+    .container { max-width: 900px; width: 100%; text-align: center; }
 
     .main-heart {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       color: var(--pink);
-      filter: drop-shadow(0 0 10px rgba(197, 106, 165, 0.3));
       animation: heartThump 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+      margin-bottom: 20px;
     }
 
     @keyframes heartThump {
@@ -189,41 +116,26 @@
       5% { transform: scale(1.1); }
       39% { transform: scale(0.85); }
       45% { transform: scale(1); }
-      60% { transform: scale(0.95); }
       100% { transform: scale(0.95); }
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 300;
-      color: var(--pink);
-      margin-bottom: 20px;
-    }
-
-    .quote {
-      font-size: clamp(1rem, 4vw, 1.6rem);
-      opacity: 0.8;
-      margin-bottom: 50px;
-      line-height: 1.5;
-    }
-
+    h1 { font-family: 'Inter', sans-serif; font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: bold; color: var(--pink); margin-bottom: 20px; }
+    .quote { font-size: clamp(1rem, 4vw, 1.4rem); opacity: 0.8; margin-bottom: 40px; line-height: 1.5; }
+    
     .btn {
       background: var(--pink-soft);
       color: var(--pink);
-      border: none;
       padding: 16px 40px;
       border-radius: 999px;
-      font-size: 1rem;
+      border: none;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(197,106,165,0.35);
-      transition: transform .3s;
+      font-size: 1rem;
+      transition: transform 0.3s;
+      box-shadow: 0 10px 30px rgba(197,106,165,0.3);
     }
-
     .btn:hover { transform: scale(1.05); }
 
-    /* ==========================
-       LETTER
-    =========================== */
+    /* THE LETTER */
     .card {
       background: var(--card);
       border-radius: 30px;
@@ -231,109 +143,51 @@
       box-shadow: var(--shadow);
       text-align: left;
     }
-
-    h2 {
-      font-size: clamp(1.8rem, 6vw, 2.6rem);
-      color: var(--pink);
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
     .letter {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1rem, 3.5vw, 1.15rem);
       line-height: 1.9;
     }
 
-    /* ==========================
-       SPOTIFY EMBEDS
-    =========================== */
-    .music .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 100px;
-    }
-
-    .spotify-embed1 {
-      width: 100%;
-      max-width: 800px;
-      box-shadow: var(--shadow);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #282828;
-      line-height: 0;
-      margin-bottom: 40px;
-    }
-
-    .spotify-embed2 {
-      width: 100%;
-      max-width: 800px;
-      box-shadow: var(--shadow);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #282828;
-      line-height: 0;
-    }
-
-
-    /* ==========================
-        POLAROIDS (ULTRA LARGE)
-    =========================== */
+    /* POLAROIDS */
     .polaroids {
       display: flex;
       justify-content: center;
-      gap: 60px; /* Increased gap for a more open feel */
+      gap: 40px;
       flex-wrap: wrap;
       padding: 40px 0;
     }
-
     .polaroid {
       background: white;
-      padding: 20px 20px 60px; /* Thicker white borders like real Polaroids */
-      width: clamp(350px, 50vw, 500px); /* significantly larger: min 350px, up to 500px */
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      padding: 15px 15px 50px;
+      width: clamp(280px, 45vw, 400px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
       cursor: pointer;
     }
-
-    .polaroid img { 
-      width: 100%; 
-      height: auto; 
-      display: block; 
-      filter: sepia(10%); /* Subtle vintage touch */
-    }
-
+    .polaroid img { width: 100%; height: auto; display: block; filter: sepia(10%); }
     .pol-1 { transform: rotate(-5deg); }
     .pol-2 { transform: rotate(4deg); }
 
+    /* Combined the hover with the reveal to ensure it works smoothly */
     .polaroid:hover { 
-      transform: rotate(0) scale(1.08); /* Zooms in slightly when hovered */
+      transform: rotate(0) scale(1.08) !important; 
       z-index: 10;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
     }
 
-    /* Ensure they look good on phones */
-    @media (max-width: 600px) {
-      .polaroids {
-        gap: 30px;
-      }
-      .polaroid {
-        width: 90%; /* Almost full width on mobile */
-        padding: 15px 15px 40px;
-      }
-    }
+    /* QR & FOOTER */
+    .qr-container { margin: 50px 0; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    .qr-image { width: 180px; border-radius: 20px; border: 5px solid white; box-shadow: var(--shadow); }
+    footer { padding: 40px; opacity: 0.6; font-size: 0.85rem; text-align: center; }
+
+    #overlay.fade-out { opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
 
   <div id="overlay">
     <div class="overlay-content">
-      <div class="heart-container">
-        <svg class="main-heart" viewBox="0 0 24 24" fill="currentColor" style="width: 50px;">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      </div>
       <p>Joe sent you a message</p>
       <button class="btn" onclick="startSite()">Open</button>
     </div>
@@ -347,12 +201,8 @@
 
   <section id="hero">
     <div class="container">
-      <div class="heart-container">
-        <svg class="main-heart" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      </div>
-      <h1 style="font-family: Inter, sans-serif; font-size: 70px; font-weight: bold;">Yohanna</h1>
+      <svg class="main-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <h1>Yohanna</h1>
       <p class="quote">I don’t want forever with everyone — just the right moments with you.<br>— Frank Ocean</p>
       <button class="btn" onclick="scrollToSection('letter')">Click For More</button>
     </div>
@@ -360,8 +210,8 @@
 
   <section id="letter">
     <div class="container">
-      <h2>Things I Never Said</h2>
-      <div class="card">
+      <h2 style="color: var(--pink); margin-bottom: 30px; font-size: clamp(1.8rem, 6vw, 2.6rem);">Things I Never Said</h2>
+      <div class="card reveal">
         <div class="letter">
           <p>Hey Yoh,<br><br>Happy Valentine’s Day.</p>
           <br>
@@ -378,85 +228,66 @@
 
   <section>
     <div class="container polaroids">
-      <div class="polaroid pol-1"><img src="images/1ph.jpeg" alt="Memories" ></div>
-      <div class="polaroid pol-2"><img src="images/WhatsApp Image 2026-02-10 at 06.25.05.jpeg" alt="Memories"></div>
+      <div class="polaroid pol-1 reveal"><img src="images/1ph.jpeg" alt="Memories"></div>
+      <div class="polaroid pol-2 reveal"><img src="images/WhatsApp Image 2026-02-10 at 06.25.05.jpeg" alt="Memories"></div>
     </div>
   </section>
 
   <section id="music">
-    <div class="container music">
-      <div class="card">
-      
-        <div class="spotify-embed1">
-          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3xKsf9qdS1CyvXSMEid6g8?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-
-        <div class="spotify-embed2">
-          <iframe id="spotify-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2OBPNhgKGfPmVA7aD5VxLj?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
+    <div class="container">
+      <div class="card reveal" style="padding: 20px;">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3xKsf9qdS1CyvXSMEid6g8?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2OBPNhgKGfPmVA7aD5VxLj?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
-      
       <audio id="bg-music" src="images/SpotiDownloader.com - Pink + White (Acoustic Instrumental) - Sam Backing Tracks.mp3" loop></audio>
+      
+      <div class="qr-container reveal">
+        <img src="images/qr.jpeg" alt="QR Code" class="qr-image">
+        <a href="yesorno.html" style="color: #4338ca; font-weight: bold; text-decoration: none; margin-top: 10px;">Click here or Scan</a>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <a href="yesorno.html" class="text-indigo-700 font-bold transition duration-300">aergaerg</a>
-    <p>Love sounds better when it’s quiet.</p>
-  </footer>
+  <footer><p>Love sounds better when it’s quiet.</p></footer>
 
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
-
     const music = document.getElementById('bg-music');
     const musicIcon = document.getElementById('bg-music-icon');
-    const spotifyIframe = document.getElementById('spotify-iframe');
 
     function startSite() {
-      const overlay = document.getElementById('overlay');
-      overlay.style.opacity = '0';
-      setTimeout(() => { 
-        overlay.style.display = 'none'; 
-      }, 800);
-      
-      music.play().catch(e => console.log("Playback error:", e));
-      updateMusicIcon('pause'); 
+      document.getElementById('overlay').classList.add('fade-out');
+      music.play().catch(e => console.log(e));
+      updateMusicIcon('pause');
     }
-
     function togglePlay() {
-      if (music.paused) {
-        music.play();
-        updateMusicIcon('pause');
-      } else {
-        music.pause();
-        updateMusicIcon('play');
-      }
+      if (music.paused) { music.play(); updateMusicIcon('pause'); }
+      else { music.pause(); updateMusicIcon('play'); }
     }
-
     function updateMusicIcon(state) {
       musicIcon.setAttribute('data-lucide', state);
       lucide.createIcons();
     }
+    function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
 
-    function scrollToSection(id) {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    /* --- SCROLL REVEAL SCRIPT --- */
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150; // Triggers when 150px of the element is visible
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
       }
     }
 
-    function checkResponsive() {
-        if (window.innerWidth < 600) {
-            spotifyIframe.height = "152";
-        } else {
-            spotifyIframe.height = "352";
-        }
-    }
+    window.addEventListener("scroll", reveal);
 
-    window.addEventListener('resize', checkResponsive);
-    window.addEventListener('load', checkResponsive);
+    // Initial check on load
+    reveal();
   </script>
 </body>
-
 </html>
